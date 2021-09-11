@@ -7,6 +7,7 @@ public class Fov : MonoBehaviour
     [SerializeField] int fovDensity = 20;
     [SerializeField] float fovDistance = 10f, fovAngle = 360;
     [SerializeField] MeshFilter fovMeshFilter;
+    [SerializeField] LayerMask fovBlockerLayers;
     
     Vector2[] rayDirections;
     Mesh fovMesh;
@@ -46,7 +47,7 @@ public class Fov : MonoBehaviour
         int triIndex = 0;
         for (var i = 0; i <= fovDensity; i++)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirections[i], fovDistance);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirections[i], fovDistance, fovBlockerLayers.value);
             if(hit.collider != null)
             {
                 fovVertices[vertIndex] = transform.InverseTransformPoint(hit.point);
