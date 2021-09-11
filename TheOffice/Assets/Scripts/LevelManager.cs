@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
 {
+    [SerializeField] GameObject EndLevelCanvasPrefab;
     private LevelCompletionStatus lvlStatus;
 
     private void Start()
@@ -23,6 +24,13 @@ public class LevelManager : Singleton<LevelManager>
 
     public void FinishedLevel()
     {
+        SendStatusToGameManager(lvlStatus);
 
+    }
+
+    void SendStatusToGameManager(LevelCompletionStatus status)
+    {
+        GameManager.Instance.LevelEnded(status);
+        Instantiate(EndLevelCanvasPrefab).GetComponent<EndLevelCanvas>().FinishedLevel(status);
     }
 }
