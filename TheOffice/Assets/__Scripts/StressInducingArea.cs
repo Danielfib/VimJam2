@@ -11,7 +11,7 @@ public class StressInducingArea : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            StressBar.Instance.SetStressVelocity(stressInduce);
+            collision.GetComponent<PlayerController>().SetStressVelocity(stressInduce);
         }
     }
 
@@ -19,7 +19,7 @@ public class StressInducingArea : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            StressBar.Instance.ResetStressVelocity();
+            collision.GetComponent<PlayerController>().ResetStressVelocity();
         }
     }
 }
