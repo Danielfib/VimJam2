@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0, 1)] float stress;
     [SerializeField] float defaultStressVelocity = 0.001f;
     [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] ParticleSystem stepPS;
 
     private float currentStressVelocity;
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     Material playerMat;
     const string STRESS_PROP_NAME = "Vector1_f3fe65c05acb434ca3acf38395a1925e";
     int shaderStressPropNameId;
+    int stepPSFlipFlop = -1;
 
     private void Awake()
     {
@@ -36,6 +38,17 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("IsWalking", rb.velocity != Vector2.zero);
         animator.speed = Mathf.Clamp(rb.velocity.magnitude / 4, 1, 2) * stressMultiplier;
+    }
+
+    public void Stepped()
+    {
+        int r = Random.Range(0, 100);
+        if (r < 40f)
+        {
+            stepPS.transform.localScale = new Vector3(stepPSFlipFlop, 1, 1);
+            stepPSFlipFlop *= -1;
+            stepPS.Play();
+        }
     }
 
     private void ProccessMovement()
