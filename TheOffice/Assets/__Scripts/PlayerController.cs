@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0, 1)] float stress;
     [SerializeField] float defaultStressVelocity = 0.001f;
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] ParticleSystem stepPS;
+    [SerializeField] ParticleSystem stepPS, stressSmokePS;
 
     private float currentStressVelocity;
 
@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
         playerMat.SetFloat(shaderStressPropNameId, stress);
         stressMultiplier = 1 + s;
         StressBar.Instance.SetStress(stress);
+        UpdateStressSmokeParticles();
     }
 
     private void ComputeStress()
@@ -82,6 +83,12 @@ public class PlayerController : MonoBehaviour
     public void ResetStressVelocity()
     {
         currentStressVelocity = defaultStressVelocity;
+    }
+
+    private void UpdateStressSmokeParticles()
+    {
+        var em = stressSmokePS.emission;
+        em.rateOverTime = stress > 0.7f ? 10 * stress : 0;
     }
     #endregion
 }
