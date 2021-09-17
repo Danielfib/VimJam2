@@ -5,7 +5,10 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] GameObject EndLevelCanvasPrefab;
+    [SerializeField] RectTransform lostScreen;
     private LevelCompletionStatus lvlStatus;
+
+    bool isStillPlaying = true;
 
     private void Start()
     {
@@ -24,8 +27,31 @@ public class LevelManager : Singleton<LevelManager>
 
     public void FinishedLevel()
     {
-        SendStatusToGameManager(lvlStatus);
+        if (isStillPlaying)
+        {
+            SendStatusToGameManager(lvlStatus);
+        }
+    }
 
+    public void Lost()
+    {
+        isStillPlaying = false;
+        Invoke("OpenLostScreen", 1f);
+    }
+
+    void OpenLostScreen()
+    {
+        lostScreen.gameObject.SetActive(true);
+    }
+
+    public void RestartLevel()
+    {
+        GameManager.Instance.RestartLevel();
+    }
+
+    public void GoToHome()
+    {
+        GameManager.Instance.GoBackToHome();
     }
 
     void SendStatusToGameManager(LevelCompletionStatus status)

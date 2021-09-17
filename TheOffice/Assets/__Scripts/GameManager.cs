@@ -27,8 +27,13 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(0);
     }
 
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(currentLevel);
+    }
+
     public void LevelEnded(LevelCompletionStatus status)
     {
-
+        //TODO: store records
     }
 }
