@@ -29,14 +29,18 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (isStillPlaying)
         {
+            isStillPlaying = false;
             SendStatusToGameManager(lvlStatus);
         }
     }
 
     public void Lost()
     {
-        isStillPlaying = false;
-        Invoke("OpenLostScreen", 1f);
+        if (isStillPlaying)
+        {
+            isStillPlaying = false;
+            Invoke("OpenLostScreen", 1f);
+        }
     }
 
     void OpenLostScreen()

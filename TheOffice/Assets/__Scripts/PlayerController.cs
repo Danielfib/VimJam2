@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         if (stress >= 1)
             StartCoroutine(StartLosingControl());
         else
-            StopCoroutine(StartLosingControl());
+            StopAllCoroutines();
     }
 
     public void SetStressVelocity(float v)
