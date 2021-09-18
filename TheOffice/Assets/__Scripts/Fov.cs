@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Fov : MonoBehaviour
 {
-    [SerializeField] int fovDensity = 20;
-    [SerializeField] float fovDistance = 10f, fovAngle = 360;
+    public int fovDensity = 20;
+    public float fovDistance = 10f, fovAngle = 360;
     [SerializeField] MeshFilter fovMeshFilter;
     [SerializeField] LayerMask fovBlockerLayers;
     

@@ -7,15 +7,20 @@ using UnityEngine.UI;
 public class StressBar : Singleton<StressBar>
 {
     [SerializeField] private RawImage[] units;
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator barAnimator, velAnimator;
     
     private float stress;
+    
+    // 0 is outside area
+    // 1 is inside relaxing area
+    // -1 is inside stressing area
+    private int stressAreaState;
 
     //s ranges from 0 to 1
     public void SetStress(float s)
     {
         stress = s;
-        animator.SetFloat("Stress", stress);
+        Animate();
         for (int i = 0; i < units.Length; i++)
         {
             var tOffset = (float)i / (float)units.Length;
@@ -28,5 +33,26 @@ public class StressBar : Singleton<StressBar>
                 units[i].color = Color.gray;
             }
         }
+    }
+
+    private void Animate()
+    {
+        barAnimator.SetFloat("Stress", stress);
+        velAnimator.SetInteger("Velocity", stressAreaState);
+    }
+
+    public void EnteredRelaxingArea()
+    {
+        stressAreaState = 1;
+    }
+
+    public void EnteredStressingArea()
+    {
+        stressAreaState = -1;
+    }
+
+    public void LeftArea()
+    {
+        stressAreaState = 0;
     }
 }

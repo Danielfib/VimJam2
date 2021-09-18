@@ -11,6 +11,8 @@ public class StressInducingArea : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
+            if (stressInduce > 0) StressBar.Instance.EnteredStressingArea();
+            if (stressInduce < 0) StressBar.Instance.EnteredRelaxingArea();
             collision.GetComponent<PlayerController>().SetStressVelocity(stressInduce);
         }
     }
@@ -19,6 +21,7 @@ public class StressInducingArea : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            StressBar.Instance.LeftArea();
             collision.GetComponent<PlayerController>().ResetStressVelocity();
         }
     }
