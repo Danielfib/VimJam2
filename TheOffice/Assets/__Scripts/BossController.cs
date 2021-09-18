@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -58,8 +59,30 @@ public class BossController : MonoBehaviour
 
     void UpdateLineRenderer()
     {
-        var pos = new Vector3[] { transform.position, patrolPositions[currentPatrolPos].position };
-        line.SetPositions(pos);
+        //var nextI = currentPatrolPos == patrolPositions.Length - 1 ? 0 : currentPatrolPos + 1;
+
+        //var positions = new List<Vector3>();
+
+        //foreach (var item in nma.path.corners)
+        //{
+        //    positions.Add(item);
+        //}
+        //var midDist = patrolPositions[nextI].position - patrolPositions[currentPatrolPos].position;
+        //positions.Add(patrolPositions[currentPatrolPos].position + midDist.normalized * 10);
+
+        //line.positionCount = positions.Count;
+        //line.SetPositions(positions.ToArray());
+
+        List<Vector3> reversedPos = nma.path.corners.ToList();
+        reversedPos.Reverse();
+
+        line.positionCount = nma.path.corners.Length;
+        line.SetPositions(reversedPos.ToArray());
+
+        //var nextI = currentPatrolPos == patrolPositions.Length - 1 ? 0 : currentPatrolPos + 1;
+        //var pos = new Vector3[] { transform.position, patrolPositions[currentPatrolPos].position, patrolPositions[nextI].position };
+        //line.positionCount = pos.Length;
+        //line.SetPositions(pos);
     }
 
     public void DetectedExclamation()
