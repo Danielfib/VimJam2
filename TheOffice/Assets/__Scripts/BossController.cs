@@ -10,6 +10,7 @@ public class BossController : MonoBehaviour
     [SerializeField] Fov fov;
     [SerializeField] LayerMask bossDetectable;
     [SerializeField] Animator animator;
+    [SerializeField] GameObject exclamationPrefab;
 
     [SerializeField] Transform[] patrolPositions;
     int currentPatrolPos = 0;
@@ -40,15 +41,22 @@ public class BossController : MonoBehaviour
                 FacePlayer();
                 ChasePlayer();
                 break;
-            case BOSS_STATE.GOING_BACK_TO_NORMAL:
+            case BOSS_STATE.STOPPED:
                 break;
         }
     }
 
     public void DetectedExclamation()
     {
-        //TODO: spawn exclamation point and make noise
+        var exc = Instantiate(exclamationPrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity, transform);
+        StartCoroutine(DestroyAfter(exc, 1.5f));
         state = BOSS_STATE.CHASING_PLAYER;
+    }
+
+    private IEnumerator DestroyAfter(GameObject go, float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(go);
     }
 
     void Patrol()
@@ -128,11 +136,22 @@ public class BossController : MonoBehaviour
         animator.SetTrigger("PlayerGotBackToWork");
         player.ReleasedByBoss();
     }
+
+    public void PlayerLost()
+    {
+        state = BOSS_STATE.STOPPED;
+        nma.isStopped = true;
+    }
+
+    public void Die()
+    {
+        animator.SetTrigger("Dead");
+    }
 }
 
 enum BOSS_STATE
 {
     NORMAL,
     CHASING_PLAYER, 
-    GOING_BACK_TO_NORMAL
+    STOPPED
 }

@@ -30327,7 +30327,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 7
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 0
@@ -30409,6 +30409,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   animator: {fileID: 1734928643}
+  exclamationPrefab: {fileID: 7732110451992485878, guid: bd4bc7389db1f9a44896a3364140ecf4, type: 3}
   patrolPositions:
   - {fileID: 228075899}
   - {fileID: 190428310}
@@ -30677,7 +30678,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 7
+  m_Speed: 15
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -30697,7 +30698,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1863681419}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.81, y: -1.96, z: 0}
+  m_LocalPosition: {x: -18.03, y: 3.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 835596160}

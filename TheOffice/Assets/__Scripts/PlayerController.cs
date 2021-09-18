@@ -164,10 +164,11 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsWalking", true);
             animator.speed = 2;
             BossController boss = FindObjectOfType<BossController>();
+            boss.PlayerLost();
             navAgent.enabled = true;
             var path = new NavMeshPath();
             navAgent.CalculatePath(boss.transform.position, path);
-            GetComponent<Chaser>().Chase(path.corners, speed);
+            GetComponent<Chaser>().Chase(path.corners, speed * 2);
             navAgent.enabled = false;
             transform.localEulerAngles = Vector3.zero;
         }

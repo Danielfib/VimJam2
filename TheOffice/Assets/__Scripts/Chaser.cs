@@ -69,8 +69,8 @@ public class Chaser : MonoBehaviour
         rb.velocity = Vector2.zero;
         BloodSplatter();
         LoseScreen();
-        //TODO: Kill boss animation and losing screen
         enabled = false;
+        FindObjectOfType<BossController>().Die();
         return;
     }
 
