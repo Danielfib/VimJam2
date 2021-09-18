@@ -9,6 +9,7 @@ public class BossController : MonoBehaviour
     [SerializeField] float stoppingDistanceFromPlayer;
     [SerializeField] Fov fov;
     [SerializeField] LayerMask bossDetectable;
+    [SerializeField] Animator animator;
 
     [SerializeField] Transform[] patrolPositions;
     int currentPatrolPos = 0;
@@ -36,11 +37,18 @@ public class BossController : MonoBehaviour
                 Patrol();
                 break;
             case BOSS_STATE.CHASING_PLAYER:
+                FacePlayer();
                 ChasePlayer();
                 break;
             case BOSS_STATE.GOING_BACK_TO_NORMAL:
                 break;
         }
+    }
+
+    public void DetectedExclamation()
+    {
+        //TODO: spawn exclamation point and make noise
+        state = BOSS_STATE.CHASING_PLAYER;
     }
 
     void Patrol()
@@ -82,15 +90,24 @@ public class BossController : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Player"))
                 {
-                    state = BOSS_STATE.CHASING_PLAYER;
+                    if (player.IsRelaxing)
+                    {
+                        animator.SetTrigger("Detected");
+                        player.DetectedByBoss();
+                    }
                 }
             }
         }
     }
 
+    public void PlayerGotBackToWork()
+    {
+        ReturnToPatrol();
+    }
+
     void ChasePlayer()
     {
-        if((player.transform.position - transform.position).magnitude > stoppingDistanceFromPlayer)
+        if ((player.transform.position - transform.position).magnitude > stoppingDistanceFromPlayer)
         {
             nma.isStopped = false;
             nma.SetDestination(player.transform.position);
@@ -100,9 +117,22 @@ public class BossController : MonoBehaviour
         }
     }
 
+    void FacePlayer()
+    {
+        if((player.transform.position - transform.position).x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        } else
+        {
+            transform.localScale = Vector3.one;
+        }
+    }
+
     void ReturnToPatrol()
     {
-        //TODO
+        state = BOSS_STATE.NORMAL;
+        animator.SetTrigger("PlayerGotBackToWork");
+        player.ReleasedByBoss();
     }
 }
 

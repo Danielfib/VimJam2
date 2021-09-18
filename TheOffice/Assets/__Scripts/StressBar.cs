@@ -41,12 +41,12 @@ public class StressBar : Singleton<StressBar>
         velAnimator.SetInteger("Velocity", stressVelocitySign);
     }
 
-    public void EnteredRelaxingArea()
+    public void IndicateStressLowering()
     {
         stressVelocitySign = -1;
     }
 
-    public void EnteredStressingArea()
+    public void IndicateStressRaising()
     {
         stressVelocitySign = 1;
     }

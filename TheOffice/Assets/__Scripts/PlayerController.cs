@@ -9,10 +9,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] Animator animator;
     [SerializeField, Range(0, 1)] float stress;
-    [SerializeField] float defaultStressVelocity = 0.001f;
+    [SerializeField] float defaultStressVelocity = 0.001f, stressVelocityWhenBossComplaining = 0.003f;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] ParticleSystem stepPS, stressSmokePS;
     [SerializeField] NavMeshAgent navAgent;
+
+    [HideInInspector]
+    public bool IsRelaxing
+    {
+        get { return currentStressVelocity < 0; }
+    }
 
     private float currentStressVelocity;
 
@@ -23,6 +29,7 @@ public class PlayerController : MonoBehaviour
     int stepPSFlipFlop = -1;
 
     bool isControllable = true;
+    bool isBeingComplained = false;
 
     private void Awake()
     {
@@ -93,12 +100,43 @@ public class PlayerController : MonoBehaviour
 
     public void SetStressVelocity(float v)
     {
-        currentStressVelocity = v;
+        if (!isBeingComplained)
+        {
+            currentStressVelocity = v;
+        }
     }
 
     public void ResetStressVelocity()
     {
+        if (!isBeingComplained)
+        {
+            StressBar.Instance.LeftArea();
+            currentStressVelocity = defaultStressVelocity;
+        }
+    }
+
+    internal void EnteredInStressArea(float stressInduce)
+    {
+        if (!isBeingComplained)
+        {
+            if (stressInduce > 0) StressBar.Instance.IndicateStressRaising();
+            if (stressInduce < 0) StressBar.Instance.IndicateStressLowering();
+            SetStressVelocity(stressInduce);
+        }
+    }
+
+    internal void DetectedByBoss()
+    {
+        isBeingComplained = true;
+        currentStressVelocity = stressVelocityWhenBossComplaining;
+        StressBar.Instance.IndicateStressRaising();
+    }
+
+    public void ReleasedByBoss()
+    {
+        isBeingComplained = false;
         currentStressVelocity = defaultStressVelocity;
+        StressBar.Instance.LeftArea();
     }
 
     private void UpdateStressSmokeParticles()

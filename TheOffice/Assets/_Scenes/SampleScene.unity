@@ -9496,6 +9496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 794681142}
   - component: {fileID: 794681141}
+  - component: {fileID: 794681143}
   m_Layer: 0
   m_Name: PlaceWherePlayerShouldBe
   m_TagString: Untagged
@@ -9513,7 +9514,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9527,12 +9528,24 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794681140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.71, y: 2.1, z: -30.652256}
+  m_LocalPosition: {x: -18.71, y: 2.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &794681143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794681140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cfc5741227f474781752506789590f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &804726939
 GameObject:
   m_ObjectHideFlags: 0
@@ -30132,10 +30145,11 @@ GameObject:
   - component: {fileID: 1734928638}
   - component: {fileID: 1734928642}
   - component: {fileID: 1734928640}
+  - component: {fileID: 1734928643}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
-  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -30148,7 +30162,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1734928637}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
+  m_Radius: 0.5
   m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
@@ -30157,7 +30171,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.2
+  m_Height: 1
   m_BaseOffset: 0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -30206,7 +30220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734928637}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.64, y: 7.31, z: 0}
+  m_LocalPosition: {x: -5.744, y: 7.916, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1235176954}
@@ -30230,6 +30244,7 @@ MonoBehaviour:
   bossDetectable:
     serializedVersion: 2
     m_Bits: 65
+  animator: {fileID: 1734928643}
   patrolPositions:
   - {fileID: 228075899}
   - {fileID: 190428310}
@@ -30240,6 +30255,25 @@ MonoBehaviour:
   - {fileID: 804726940}
   - {fileID: 264236918}
   - {fileID: 1052117288}
+--- !u!95 &1734928643
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734928637}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 818edc50588e2074d91f89764b11ea83, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1846960249
 GameObject:
   m_ObjectHideFlags: 0
@@ -30443,6 +30477,7 @@ MonoBehaviour:
   animator: {fileID: 1863681425}
   stress: 0
   defaultStressVelocity: 0.001
+  stressVelocityWhenBossComplaining: 0.003
   spriteRenderer: {fileID: 835596161}
   stepPS: {fileID: 1717996321}
   stressSmokePS: {fileID: 227713487}
@@ -30477,7 +30512,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1863681419}
   m_Enabled: 0
   m_AgentTypeID: 0
-  m_Radius: 0.8
+  m_Radius: 0.5
   m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
@@ -30486,7 +30521,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -30498,7 +30533,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1863681419}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.404, y: 6.506, z: 0}
+  m_LocalPosition: {x: -7.81, y: -1.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 835596160}
