@@ -12,9 +12,9 @@ public class StressBar : Singleton<StressBar>
     private float stress;
     
     // 0 is outside area
-    // 1 is inside relaxing area
-    // -1 is inside stressing area
-    private int stressAreaState;
+    // -1 is inside relaxing area
+    // 1 is inside stressing area
+    private int stressVelocitySign;
 
     //s ranges from 0 to 1
     public void SetStress(float s)
@@ -38,21 +38,21 @@ public class StressBar : Singleton<StressBar>
     private void Animate()
     {
         barAnimator.SetFloat("Stress", stress);
-        velAnimator.SetInteger("Velocity", stressAreaState);
+        velAnimator.SetInteger("Velocity", stressVelocitySign);
     }
 
     public void EnteredRelaxingArea()
     {
-        stressAreaState = 1;
+        stressVelocitySign = -1;
     }
 
     public void EnteredStressingArea()
     {
-        stressAreaState = -1;
+        stressVelocitySign = 1;
     }
 
     public void LeftArea()
     {
-        stressAreaState = 0;
+        stressVelocitySign = 0;
     }
 }
