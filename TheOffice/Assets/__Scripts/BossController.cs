@@ -65,19 +65,6 @@ public class BossController : MonoBehaviour
         }   
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    for (var i = 0; i <= fov.fovDensity; i++)
-    //    {
-    //        var angle = ((float)i / (float)fov.fovDensity) * (2 * Mathf.PI) * Mathf.Rad2Deg;
-    //        var dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-
-    //        Gizmos.color = Color.black;
-    //        Gizmos.DrawLine(transform.position, transform.position + (Vector3)dir * fov.fovDistance);
-    //        Gizmos.color = Color.blue;
-    //    }
-    //}
-
     void CheckForWrongThings()
     {
         for (var i = 0; i <= fov.fovDensity; i++)
@@ -86,18 +73,25 @@ public class BossController : MonoBehaviour
             var dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, fov.fovDistance, bossDetectable.value);
-            if(hit.collider != null)
+            if (hit.collider != null)
             {
-                if (hit.collider.CompareTag("Player"))
+                if (hit.collider.CompareTag("Player") && player.IsRelaxing) //found player relaxing
                 {
-                    if (player.IsRelaxing)
-                    {
-                        animator.SetTrigger("Detected");
-                        player.DetectedByBoss();
-                    }
+                    DetectedPlayer();
+                } 
+                else if (hit.collider.CompareTag("PlayerWorkspace") 
+                    && (player.transform.position - hit.transform.position).magnitude > 2) //found empty workspace
+                {
+                    DetectedPlayer();
                 }
             }
         }
+    }
+
+    void DetectedPlayer()
+    {
+        animator.SetTrigger("Detected");
+        player.DetectedByBoss();
     }
 
     public void PlayerGotBackToWork()
