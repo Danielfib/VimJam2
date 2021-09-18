@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class BossController : MonoBehaviour
 {
-    [SerializeField] float stoppingDistanceFromPlayer;
+    [SerializeField] float stoppingDistanceFromPlayer, patrolSpeed, chasePlayerSpeed;
     [SerializeField] Fov fov;
     [SerializeField] LayerMask bossDetectable;
     [SerializeField] Animator animator;
@@ -22,6 +22,7 @@ public class BossController : MonoBehaviour
     private void Start()
     {
         nma = GetComponent<NavMeshAgent>();
+        nma.speed = patrolSpeed;
         player = GameObject.FindObjectOfType<PlayerController>();
     }
 
@@ -51,6 +52,7 @@ public class BossController : MonoBehaviour
         var exc = Instantiate(exclamationPrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity, transform);
         StartCoroutine(DestroyAfter(exc, 1.5f));
         state = BOSS_STATE.CHASING_PLAYER;
+        nma.speed = chasePlayerSpeed;
     }
 
     private IEnumerator DestroyAfter(GameObject go, float time)
@@ -133,6 +135,7 @@ public class BossController : MonoBehaviour
     void ReturnToPatrol()
     {
         state = BOSS_STATE.NORMAL;
+        nma.speed = patrolSpeed;
         animator.SetTrigger("PlayerGotBackToWork");
         player.ReleasedByBoss();
     }

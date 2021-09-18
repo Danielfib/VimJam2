@@ -30404,6 +30404,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stoppingDistanceFromPlayer: 3
+  patrolSpeed: 3
+  chasePlayerSpeed: 8
   fov: {fileID: 65908692}
   bossDetectable:
     serializedVersion: 2
