@@ -137,6 +137,10 @@ public class PlayerController : MonoBehaviour
         isBeingComplained = false;
         currentStressVelocity = defaultStressVelocity;
         StressBar.Instance.LeftArea();
+
+        //relieve stress
+        //TODO: play relieve sound
+        stress = 0.7f * stress;
     }
 
     private void UpdateStressSmokeParticles()
