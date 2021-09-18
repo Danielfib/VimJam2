@@ -24386,7 +24386,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3324e0896e9978e48bd6646cf5ddb79f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -30412,6 +30412,7 @@ MonoBehaviour:
     m_Bits: 65
   animator: {fileID: 1734928643}
   exclamationPrefab: {fileID: 7732110451992485878, guid: bd4bc7389db1f9a44896a3364140ecf4, type: 3}
+  pathLinePrefab: {fileID: 1264024149138705427, guid: 36e3e5fde20bdd140ab9decfd5f3cc7c, type: 3}
   patrolPositions:
   - {fileID: 228075899}
   - {fileID: 190428310}

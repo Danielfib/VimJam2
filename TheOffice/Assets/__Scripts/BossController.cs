@@ -11,6 +11,7 @@ public class BossController : MonoBehaviour
     [SerializeField] LayerMask bossDetectable;
     [SerializeField] Animator animator;
     [SerializeField] GameObject exclamationPrefab;
+    [SerializeField] GameObject pathLinePrefab;
 
     [SerializeField] Transform[] patrolPositions;
     int currentPatrolPos = 0;
@@ -18,12 +19,17 @@ public class BossController : MonoBehaviour
     NavMeshAgent nma;
     PlayerController player;
     BOSS_STATE state;
+    LineRenderer line;
 
     private void Start()
     {
         nma = GetComponent<NavMeshAgent>();
         nma.speed = patrolSpeed;
         player = GameObject.FindObjectOfType<PlayerController>();
+        if(line == null)
+        {
+            line = Instantiate(pathLinePrefab, transform).GetComponent<LineRenderer>();
+        }
     }
 
     private void Update()
@@ -36,15 +42,24 @@ public class BossController : MonoBehaviour
         switch (state)
         {
             case BOSS_STATE.NORMAL:
+                line.enabled = true;
                 Patrol();
                 break;
             case BOSS_STATE.CHASING_PLAYER:
+                line.enabled = false;
                 FacePlayer();
                 ChasePlayer();
                 break;
             case BOSS_STATE.STOPPED:
+                line.enabled = false;
                 break;
         }
+    }
+
+    void UpdateLineRenderer()
+    {
+        var pos = new Vector3[] { transform.position, patrolPositions[currentPatrolPos].position };
+        line.SetPositions(pos);
     }
 
     public void DetectedExclamation()
@@ -64,6 +79,7 @@ public class BossController : MonoBehaviour
     void Patrol()
     {
         nma.isStopped = false;
+        UpdateLineRenderer();
         CheckForWrongThings();
         nma.SetDestination((Vector2)patrolPositions[currentPatrolPos].position);
         if((transform.position - patrolPositions[currentPatrolPos].position).magnitude < 1)
