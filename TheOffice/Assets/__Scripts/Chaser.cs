@@ -66,6 +66,7 @@ public class Chaser : MonoBehaviour
 
     private void ArrivedAtFinalPosition()
     {
+        rb.velocity = Vector2.zero;
         BloodSplatter();
         LoseScreen();
         //TODO: Kill boss animation and losing screen
