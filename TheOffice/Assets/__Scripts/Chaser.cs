@@ -70,6 +70,7 @@ public class Chaser : MonoBehaviour
         BloodSplatter();
         LoseScreen();
         enabled = false;
+        SFXManager.Instance.PlayerHitsBoss();
         FindObjectOfType<BossController>().Die();
         return;
     }

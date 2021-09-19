@@ -46,6 +46,7 @@ public class LevelManager : Singleton<LevelManager>
 
     void OpenLostScreen()
     {
+        SFXManager.Instance.Lose();
         lostScreen.gameObject.SetActive(true);
     }
 

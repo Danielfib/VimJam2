@@ -55,4 +55,9 @@ public class StressBar : Singleton<StressBar>
     {
         stressVelocitySign = 0;
     }
+
+    public void PlaySirenSound()
+    {
+        SFXManager.Instance.PlayerAlertSiren();
+    }
 }

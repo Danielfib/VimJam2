@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class HoverButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HoverButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     [SerializeField]
     private float sizeMultiplier, animationSpeed;
@@ -50,5 +50,10 @@ public class HoverButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
         }
         transform.localScale = initSize;
 
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        SFXManager.Instance.ButtonPress();
     }
 }

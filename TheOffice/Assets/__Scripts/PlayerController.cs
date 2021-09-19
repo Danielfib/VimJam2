@@ -162,6 +162,7 @@ public class PlayerController : MonoBehaviour
 
     public void RelieveStress(float stressRelief)
     {
+        SFXManager.Instance.StressRelief();
         stress *= stressRelief;
     }
 
@@ -183,6 +184,7 @@ public class PlayerController : MonoBehaviour
         {
             isControllable = false;
 
+            SFXManager.Instance.PlayerLostMind();
             animator.SetBool("IsWalking", true);
             animator.speed = 2;
             BossController boss = FindObjectOfType<BossController>();
