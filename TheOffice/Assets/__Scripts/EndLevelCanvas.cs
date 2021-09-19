@@ -37,4 +37,9 @@ public class EndLevelCanvas : MonoBehaviour
     {
         GameManager.Instance.GoBackToHome();
     }
+
+    public void RestartLevel()
+    {
+        GameManager.Instance.RestartLevel();
+    }
 }
