@@ -18,6 +18,7 @@ public class LevelManager : Singleton<LevelManager>
     public void CaughtByBoss()
     {
         lvlStatus.timesBossDetected++;
+        LoseSecondStar();
     }
 
     public void SetFinalStress(float s)
@@ -63,4 +64,8 @@ public class LevelManager : Singleton<LevelManager>
         GameManager.Instance.LevelEnded(status);
         Instantiate(EndLevelCanvasPrefab).GetComponent<EndLevelCanvas>().FinishedLevel(status);
     }
+
+    public void LoseFirstStar() { lvlStatus.hasFirstStar = false; }
+    public void LoseSecondStar() { lvlStatus.hasSecondStar = false; }
+    public void WinThirdStar() { lvlStatus.hasThirdStar = true; }
 }

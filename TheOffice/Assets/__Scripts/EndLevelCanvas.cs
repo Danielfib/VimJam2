@@ -2,9 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EndLevelCanvas : MonoBehaviour
 {
+    [SerializeField]
+    private Image firstStar, secondStar, thirdStar;
+    private Color noStarColor = new Color(0.1f, 0.1f, 0.1f, 1f);
+
     public void FinishedLevel(LevelCompletionStatus status)
     {
         SetupScreenWithStatus(status);
@@ -13,7 +18,9 @@ public class EndLevelCanvas : MonoBehaviour
 
     private void SetupScreenWithStatus(LevelCompletionStatus status)
     {
-        
+        firstStar.color = status.hasFirstStar ? Color.white : noStarColor;
+        secondStar.color = status.hasSecondStar ? Color.white : noStarColor;
+        thirdStar.color = status.hasThirdStar ? Color.white : noStarColor;
     }
 
     void OpenScreen()

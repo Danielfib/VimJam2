@@ -67,7 +67,11 @@ public class LongInteractable : MonoBehaviour
         isBeingInteracted = false;
         pb.gameObject.SetActive(false);
         contactingPlayer.currentlyInteractingWith = null;
-        if(succesfully) contactingPlayer.RelieveStress(stressRelief);
+        if (succesfully)
+        {
+            contactingPlayer.RelieveStress(stressRelief);
+            LevelManager.Instance.WinThirdStar();
+        }
     }
 
     public void Interrupt()

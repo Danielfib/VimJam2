@@ -141,6 +141,7 @@ public class BossController : MonoBehaviour
     {
         animator.SetTrigger("Detected");
         player.DetectedByBoss();
+        LevelManager.Instance.CaughtByBoss();
     }
 
     public void PlayerGotBackToWork()
