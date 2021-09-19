@@ -19,7 +19,7 @@ public class BossController : MonoBehaviour
 
     NavMeshAgent nma;
     PlayerController player;
-    BOSS_STATE state;
+    public BOSS_STATE state;
     LineRenderer line;
 
     private void Start()
@@ -191,7 +191,7 @@ public class BossController : MonoBehaviour
     }
 }
 
-enum BOSS_STATE
+public enum BOSS_STATE
 {
     NORMAL,
     CHASING_PLAYER, 

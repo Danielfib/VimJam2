@@ -140,7 +140,12 @@ public class PlayerController : MonoBehaviour
 
         //relieve stress
         //TODO: play relieve sound
-        stress = 0.7f * stress;
+        RelieveStress(0.7f);
+    }
+
+    public void RelieveStress(float stressRelief)
+    {
+        stress *= stressRelief;
     }
 
     private void UpdateStressSmokeParticles()

@@ -9,7 +9,10 @@ public class PlayerWorkstation : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             BossController boss = FindObjectOfType<BossController>();
-            boss.PlayerGotBackToWork();
+            if(boss.state == BOSS_STATE.CHASING_PLAYER)
+            {
+                boss.PlayerGotBackToWork();
+            }
         }
     }
 }
