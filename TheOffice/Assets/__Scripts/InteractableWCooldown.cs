@@ -7,6 +7,7 @@ public class InteractableWCooldown : MonoBehaviour
 {
     [SerializeField] GameObject interactablePopup;
     [SerializeField] float cooldown, stressRelief;
+    [SerializeField] Animator anim;
 
     bool isPlayerInside = false, isOnCooldown = false;
     PlayerController contactingPlayer;
@@ -47,8 +48,10 @@ public class InteractableWCooldown : MonoBehaviour
 
     private IEnumerator StartCooldown()
     {
+        anim.SetBool("IsOnCooldown", true);
         isOnCooldown = true;
         yield return new WaitForSeconds(cooldown);
         isOnCooldown = false;
+        anim.SetBool("IsOnCooldown", false);
     }
 }
