@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     bool isControllable = true;
     bool isBeingComplained = false;
+    bool isBusy = false;
 
     private void Awake()
     {
@@ -67,10 +68,18 @@ public class PlayerController : MonoBehaviour
 
     private void ProccessMovement()
     {
+        if (isBusy) return;
+
         var h = Input.GetAxis("Horizontal");
         var v = Input.GetAxis("Vertical");
 
         rb.velocity = new Vector2(h, v) * speed;
+    }
+
+    public void SetIsBusy(bool v)
+    {
+        rb.velocity = Vector2.zero;
+        isBusy = v;
     }
 
     #region Stress

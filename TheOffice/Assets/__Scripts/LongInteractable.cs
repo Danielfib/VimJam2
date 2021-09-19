@@ -48,6 +48,7 @@ public class LongInteractable : MonoBehaviour
 
     IEnumerator ProgressCoroutine()
     {
+        contactingPlayer.SetIsBusy(true);
         var progress = 0f;
         var speed = Time.fixedDeltaTime / duration;
         while(progress < 1)
@@ -61,6 +62,7 @@ public class LongInteractable : MonoBehaviour
 
     void FinishedInteracting()
     {
+        contactingPlayer.SetIsBusy(false);
         isBeingInteracted = false;
         pb.gameObject.SetActive(false);
         contactingPlayer.RelieveStress(stressRelief);
@@ -69,6 +71,7 @@ public class LongInteractable : MonoBehaviour
 
     public void Interrupt()
     {
+        contactingPlayer.SetIsBusy(false);
         //TODO: interrupt when boss caught player playing
     }
 }
