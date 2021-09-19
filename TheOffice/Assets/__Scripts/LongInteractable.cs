@@ -17,6 +17,7 @@ public class LongInteractable : MonoBehaviour
         {
             interactablePopup.SetActive(true);
             contactingPlayer = collision.GetComponent<PlayerController>();
+            contactingPlayer.currentlyInteractingWith = this;
         }
     }
 
@@ -57,21 +58,20 @@ public class LongInteractable : MonoBehaviour
             pb.SetValue(progress);
             progress += speed;
         }
-        FinishedInteracting();
+        FinishedInteracting(true);
     }
 
-    void FinishedInteracting()
+    void FinishedInteracting(bool succesfully)
     {
         contactingPlayer.SetIsBusy(false);
         isBeingInteracted = false;
         pb.gameObject.SetActive(false);
-        contactingPlayer.RelieveStress(stressRelief);
-        //TODO: re-enable player input
+        contactingPlayer.currentlyInteractingWith = null;
+        if(succesfully) contactingPlayer.RelieveStress(stressRelief);
     }
 
     public void Interrupt()
     {
-        contactingPlayer.SetIsBusy(false);
-        //TODO: interrupt when boss caught player playing
+        FinishedInteracting(false);
     }
 }

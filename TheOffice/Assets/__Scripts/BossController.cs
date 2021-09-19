@@ -124,7 +124,7 @@ public class BossController : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, fov.fovDistance, bossDetectable.value);
             if (hit.collider != null)
             {
-                if (hit.collider.CompareTag("Player") && player.IsRelaxing) //found player relaxing
+                if (hit.collider.CompareTag("Player") && (player.IsRelaxing || player.isBusy)) //found player relaxing or playing videogame
                 {
                     DetectedPlayer();
                 } 

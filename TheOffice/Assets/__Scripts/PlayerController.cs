@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
 
     bool isControllable = true;
     bool isBeingComplained = false;
-    bool isBusy = false;
+    [HideInInspector] public bool isBusy = false;
+    [HideInInspector] public LongInteractable currentlyInteractingWith;
 
     private void Awake()
     {
@@ -139,6 +140,12 @@ public class PlayerController : MonoBehaviour
         isBeingComplained = true;
         currentStressVelocity = stressVelocityWhenBossComplaining;
         StressBar.Instance.IndicateStressRaising();
+
+        if (isBusy)
+        {
+            currentlyInteractingWith.Interrupt();
+            currentlyInteractingWith = null;
+        }
     }
 
     public void ReleasedByBoss()
