@@ -30,7 +30,7 @@ public class MusicManager : MonoBehaviour
         if(level == 0)
         {
             Play(menuMusic);
-        } else
+        } else if (currentLevel == 0)
         {
             PlayRandomMusic();
         }
@@ -46,7 +46,7 @@ public class MusicManager : MonoBehaviour
 
     void PlayRandomMusic()
     {
-        int r = Random.Range(0, gameMusics.Length - 1);
+        int r = Random.Range(0, gameMusics.Length);
         var chosenClip = gameMusics[r];
         Play(chosenClip);
     }
