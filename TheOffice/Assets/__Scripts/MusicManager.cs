@@ -17,8 +17,6 @@ public class MusicManager : Singleton<MusicManager>
     [SerializeField]
     AudioClip bossMusic;
 
-    int currentLevel = 0;
-
     public void Awake()
     {
         base.Awake();
@@ -34,19 +32,17 @@ public class MusicManager : Singleton<MusicManager>
         if(level == 0) //main menu
         {
             Play(menuMusic);
-        } else if (currentLevel == SceneManager.sceneCount - 2) //last level
+        } else if (level == SceneManager.sceneCount - 1) //last level
         {
             Play(bossMusic);
         }
-        else if(currentLevel == SceneManager.sceneCount - 1) //ending screen
+        else if(level == SceneManager.sceneCount) //ending screen
         {
             PlayRandomMusic();
         } else //normal levels
         {
             PlayRandomMusic();
         }
-
-        currentLevel = level;
     }
 
     void Play(AudioClip clip)
