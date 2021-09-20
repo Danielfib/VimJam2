@@ -43,4 +43,9 @@ public class MainScreenManager : MonoBehaviour
         levelsScreen.SetActive(false);
         homeScreen.SetActive(true);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

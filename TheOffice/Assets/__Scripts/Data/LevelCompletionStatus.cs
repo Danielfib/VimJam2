@@ -13,7 +13,8 @@ public class LevelCompletionStatus
     {
         finalStress = 0;
         timesBossDetected = 0;
-        hasFirstStar = hasSecondStar = true;
+        hasFirstStar = true;
+        hasSecondStar = true;
         hasThirdStar = false;
     }
 

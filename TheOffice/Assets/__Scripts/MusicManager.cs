@@ -34,11 +34,11 @@ public class MusicManager : Singleton<MusicManager>
         if(level == 0) //main menu
         {
             Play(menuMusic);
-        } else if (level == SceneManager.sceneCount - 1) //last level
+        } else if (level == SceneManager.sceneCountInBuildSettings - 2) //last level
         {
             Play(bossMusic);
         }
-        else if(level == SceneManager.sceneCount) //ending screen
+        else if(level == SceneManager.sceneCountInBuildSettings) //ending screen
         {
             PlayRandomMusic();
         } else //normal levels

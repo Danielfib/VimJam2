@@ -19,6 +19,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
         if (instance != null)
         {
             Debug.LogError("Already exists one instance of " + typeof(T));
+            Destroy(gameObject);
         }
         else
         {

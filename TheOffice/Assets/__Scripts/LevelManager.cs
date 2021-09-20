@@ -75,7 +75,8 @@ public class LevelManager : Singleton<LevelManager>
         FindObjectOfType<StressBar>().enabled = false;
     }
 
-    public void LoseFirstStar() { lvlStatus.hasFirstStar = false; }
+    //always have first star
+    //public void LoseFirstStar() { lvlStatus.hasFirstStar = false; }
     public void LoseSecondStar() { lvlStatus.hasSecondStar = false; }
     public void WinThirdStar() { lvlStatus.hasThirdStar = true; }
 }

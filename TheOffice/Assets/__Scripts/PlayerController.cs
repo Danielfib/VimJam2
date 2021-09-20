@@ -86,7 +86,6 @@ public class PlayerController : MonoBehaviour
     #region Stress
     private void UpdatedStress(float s)
     {
-        if(s > 0.7) { LevelManager.Instance.LoseFirstStar(); }
         playerMat.SetFloat(shaderStressPropNameId, stress);
         stressMultiplier = 1 + s;
         StressBar.Instance.SetStress(stress);
