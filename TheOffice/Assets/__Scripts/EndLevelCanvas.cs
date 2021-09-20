@@ -18,9 +18,14 @@ public class EndLevelCanvas : MonoBehaviour
 
     private void SetupScreenWithStatus(LevelCompletionStatus status)
     {
-        firstStar.color = status.hasFirstStar ? Color.white : noStarColor;
-        secondStar.color = status.hasSecondStar ? Color.white : noStarColor;
-        thirdStar.color = status.hasThirdStar ? Color.white : noStarColor;
+        int stars = 0;
+        if (status.hasFirstStar) stars++;
+        if (status.hasSecondStar) stars++;
+        if (status.hasThirdStar) stars++;
+
+        firstStar.color = stars > 0 ? Color.white : noStarColor;
+        secondStar.color = stars > 1 ? Color.white : noStarColor;
+        thirdStar.color = stars > 2 ? Color.white : noStarColor;
     }
 
     void OpenScreen()
