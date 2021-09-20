@@ -18,9 +18,9 @@ public class SFXManager : Singleton<SFXManager>
         DontDestroyOnLoad(this);
     }
 
-    void Play(AudioClip clip) { src.PlayOneShot(clip); }
+    void Play(AudioClip clip, float vol = 0.8f) { src.PlayOneShot(clip, vol); }
 
-    public void BossAlerted() { Play(bossAlert); }
+    public void BossAlerted() { Play(bossAlert, 0.6f); }
     public void BossChasing() { Play(bossChasing); }
 
     public void PlayerLostMind() { Play(playerLostMind); }
