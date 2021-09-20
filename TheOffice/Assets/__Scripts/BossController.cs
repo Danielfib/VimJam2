@@ -54,6 +54,7 @@ public class BossController : MonoBehaviour
                 ChasePlayer();
                 break;
             case BOSS_STATE.STOPPED:
+                FacePlayer();
                 line.enabled = false;
                 break;
         }
@@ -123,6 +124,8 @@ public class BossController : MonoBehaviour
 
     void DetectedPlayer()
     {
+        print("detectou!!!!");
+        state = BOSS_STATE.STOPPED;
         animator.SetTrigger("Detected");
         player.DetectedByBoss();
         LevelManager.Instance.CaughtByBoss();
@@ -180,7 +183,7 @@ public class BossController : MonoBehaviour
     {
         while (state == BOSS_STATE.CHASING_PLAYER)
         {
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(0.6f);
             int r = Random.Range(0, complainAudios.Length);
             src.PlayOneShot(complainAudios[r]);
         }
