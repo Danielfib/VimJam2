@@ -5,15 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] int[] lvlsBuildIds;
     int currentLevel = 1;
-
-    LevelCompletionStatus[] stats;
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        stats = new LevelCompletionStatus[lvlsBuildIds.Length];
     }
 
     public void NextLevel() 
@@ -32,8 +28,28 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(currentLevel);
     }
 
+    public void LoadLevel(int index)
+    {
+        currentLevel = index;
+        SceneManager.LoadScene(currentLevel);
+    }
+
     public void LevelEnded(LevelCompletionStatus status)
     {
-        //TODO: store records
+        StoreStatus(status);
+    }
+
+    void StoreStatus(LevelCompletionStatus status)
+    {
+        int stars = 0;
+        if (status.hasFirstStar) stars++;
+        if (status.hasSecondStar) stars++;
+        if (status.hasThirdStar) stars++;
+
+        int prevStars = PlayerPrefs.GetInt(currentLevel.ToString());
+        if(stars > prevStars)
+        {
+            PlayerPrefs.SetInt(currentLevel.ToString(), stars);
+        }
     }
 }

@@ -15,15 +15,14 @@ public class MainScreenManager : MonoBehaviour
 
     public void GoToLevelScreen()
     {
-        //TODO
         homeScreen.SetActive(false);
         returnButton.SetActive(true);
         levelsScreen.SetActive(true);
+        FindObjectOfType<LevelsScreenManager>().LoadLevelsStatus();
     }
 
     public void GoToCreditsScreen()
     {
-        //TODO
         homeScreen.SetActive(false);
         returnButton.SetActive(true);
         creditsScreen.SetActive(true);
@@ -31,7 +30,6 @@ public class MainScreenManager : MonoBehaviour
 
     public void GoToTutorialScreen()
     {
-        //TODO
         homeScreen.SetActive(false);
         returnButton.SetActive(true);
         tutorialScreen.SetActive(true);

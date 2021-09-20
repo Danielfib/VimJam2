@@ -114,7 +114,7 @@ public class BossController : MonoBehaviour
                     DetectedPlayer();
                 } 
                 else if (hit.collider.CompareTag("PlayerWorkspace") 
-                    && (player.transform.position - hit.transform.position).magnitude > 2) //found empty workspace
+                    && (player.transform.position - hit.transform.position).magnitude > 2.5f) //found empty workspace
                 {
                     DetectedPlayer();
                 }
@@ -124,7 +124,6 @@ public class BossController : MonoBehaviour
 
     void DetectedPlayer()
     {
-        print("detectou!!!!");
         state = BOSS_STATE.STOPPED;
         animator.SetTrigger("Detected");
         player.DetectedByBoss();
