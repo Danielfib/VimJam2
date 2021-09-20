@@ -14,6 +14,9 @@ public class MusicManager : Singleton<MusicManager>
     [SerializeField]
     AudioClip[] gameMusics;
 
+    [SerializeField]
+    AudioClip bossMusic;
+
     int currentLevel = 0;
 
     public void Awake()
@@ -27,10 +30,18 @@ public class MusicManager : Singleton<MusicManager>
     private void LoadedScene(Scene scene, LoadSceneMode mode)
     {
         int level = scene.buildIndex;
-        if(level == 0)
+        
+        if(level == 0) //main menu
         {
             Play(menuMusic);
-        } else if (currentLevel == 0)
+        } else if (currentLevel == SceneManager.sceneCount - 2) //last level
+        {
+            Play(bossMusic);
+        }
+        else if(currentLevel == SceneManager.sceneCount - 1) //ending screen
+        {
+            PlayRandomMusic();
+        } else //normal levels
         {
             PlayRandomMusic();
         }

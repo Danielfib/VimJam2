@@ -2397,6 +2397,7 @@ MonoBehaviour:
   gameMusics:
   - {fileID: 8300000, guid: ab655156ac5cd024397d10cae027610f, type: 3}
   - {fileID: 8300000, guid: d5ea1a17f7000414ebc73b321e3c5c90, type: 3}
+  bossMusic: {fileID: 8300000, guid: 2964c14ac2ce7af48aed4389645f8034, type: 3}
 --- !u!82 &1028364115
 AudioSource:
   m_ObjectHideFlags: 0
