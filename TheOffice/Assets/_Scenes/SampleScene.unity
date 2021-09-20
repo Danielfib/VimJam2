@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bce0c5f136bc9c48a2778dbb2f72735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  realTime: 60
+  realTime: 10
   initRot: -180
   endRot: -450
   beginTickTockAt: 0.85

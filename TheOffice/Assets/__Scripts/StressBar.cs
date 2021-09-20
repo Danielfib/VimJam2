@@ -60,4 +60,10 @@ public class StressBar : Singleton<StressBar>
     {
         SFXManager.Instance.PlayerAlertSiren();
     }
+
+    private void OnDisable()
+    {
+        barAnimator.enabled = false;
+        velAnimator.enabled = false;
+    }
 }

@@ -191,6 +191,11 @@ public class BossController : MonoBehaviour
     {
         animator.SetTrigger("Dead");
     }
+
+    private void OnDisable()
+    {
+        nma.isStopped = true;
+    }
 }
 
 public enum BOSS_STATE

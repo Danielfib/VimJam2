@@ -31,6 +31,7 @@ public class LevelManager : Singleton<LevelManager>
         if (isStillPlaying)
         {
             isStillPlaying = false;
+            StopLevel();
             SendStatusToGameManager(lvlStatus);
         }
     }
@@ -46,6 +47,7 @@ public class LevelManager : Singleton<LevelManager>
 
     void OpenLostScreen()
     {
+        StopLevel();
         SFXManager.Instance.Lose();
         lostScreen.gameObject.SetActive(true);
     }
@@ -64,6 +66,13 @@ public class LevelManager : Singleton<LevelManager>
     {
         GameManager.Instance.LevelEnded(status);
         Instantiate(EndLevelCanvasPrefab).GetComponent<EndLevelCanvas>().FinishedLevel(status);
+    }
+
+    void StopLevel()
+    {
+        FindObjectOfType<PlayerController>().enabled = false;
+        FindObjectOfType<BossController>().enabled = false;
+        FindObjectOfType<StressBar>().enabled = false;
     }
 
     public void LoseFirstStar() { lvlStatus.hasFirstStar = false; }
