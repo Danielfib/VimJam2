@@ -13,6 +13,8 @@ public class BossController : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] GameObject exclamationPrefab;
     [SerializeField] GameObject pathLinePrefab;
+    [SerializeField] AudioSource src;
+    [SerializeField] AudioClip[] complainAudios;
 
     [SerializeField] Transform[] patrolPositions;
     int currentPatrolPos = 0;
@@ -59,30 +61,11 @@ public class BossController : MonoBehaviour
 
     void UpdateLineRenderer()
     {
-        //var nextI = currentPatrolPos == patrolPositions.Length - 1 ? 0 : currentPatrolPos + 1;
-
-        //var positions = new List<Vector3>();
-
-        //foreach (var item in nma.path.corners)
-        //{
-        //    positions.Add(item);
-        //}
-        //var midDist = patrolPositions[nextI].position - patrolPositions[currentPatrolPos].position;
-        //positions.Add(patrolPositions[currentPatrolPos].position + midDist.normalized * 10);
-
-        //line.positionCount = positions.Count;
-        //line.SetPositions(positions.ToArray());
-
         List<Vector3> reversedPos = nma.path.corners.ToList();
         reversedPos.Reverse();
 
         line.positionCount = nma.path.corners.Length;
         line.SetPositions(reversedPos.ToArray());
-
-        //var nextI = currentPatrolPos == patrolPositions.Length - 1 ? 0 : currentPatrolPos + 1;
-        //var pos = new Vector3[] { transform.position, patrolPositions[currentPatrolPos].position, patrolPositions[nextI].position };
-        //line.positionCount = pos.Length;
-        //line.SetPositions(pos);
     }
 
     public void DetectedExclamation()
@@ -91,6 +74,7 @@ public class BossController : MonoBehaviour
         StartCoroutine(DestroyAfter(exc, 1.5f));
         state = BOSS_STATE.CHASING_PLAYER;
         nma.speed = chasePlayerSpeed;
+        StartCoroutine(ComplainAudio());
     }
 
     private IEnumerator DestroyAfter(GameObject go, float time)
@@ -192,9 +176,20 @@ public class BossController : MonoBehaviour
         animator.SetTrigger("Dead");
     }
 
+    IEnumerator ComplainAudio()
+    {
+        while (state == BOSS_STATE.CHASING_PLAYER)
+        {
+            yield return new WaitForSeconds(0.8f);
+            int r = Random.Range(0, complainAudios.Length);
+            src.PlayOneShot(complainAudios[r]);
+        }
+    }
+
     private void OnDisable()
     {
         nma.isStopped = true;
+        StopAllCoroutines();
     }
 }
 

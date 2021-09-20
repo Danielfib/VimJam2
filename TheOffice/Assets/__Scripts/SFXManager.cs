@@ -20,7 +20,7 @@ public class SFXManager : Singleton<SFXManager>
 
     void Play(AudioClip clip, float vol = 0.8f) { src.PlayOneShot(clip, vol); }
 
-    public void BossAlerted() { Play(bossAlert, 0.6f); }
+    public void BossAlerted() { Play(bossAlert, 0.1f); }
     public void BossChasing() { Play(bossChasing); }
 
     public void PlayerLostMind() { Play(playerLostMind); }
@@ -30,6 +30,10 @@ public class SFXManager : Singleton<SFXManager>
     public void Lose() { Play(lose); }
     public void Win() { StopMusicFor(win.length); Play(win); }
     public void StressRelief() { Play(stressRelief); }
+    public void PlayedVideoGame(float duration)
+    {
+
+    }
 
     public void ButtonPress() { Play(buttonPress); }
 

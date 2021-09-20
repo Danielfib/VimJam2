@@ -27,7 +27,6 @@ public class MusicManager : Singleton<MusicManager>
     private void LoadedScene(Scene scene, LoadSceneMode mode)
     {
         int level = scene.buildIndex;
-        print(level);
         if(level == 0)
         {
             Play(menuMusic);

@@ -7,6 +7,8 @@ public class LongInteractable : MonoBehaviour
     [SerializeField] GameObject interactablePopup;
     [SerializeField] float duration, stressRelief;
     [SerializeField] SpriteProgressBar pb;
+    [SerializeField] AudioSource src;
+    [SerializeField] AudioClip interactingAudio;
 
     PlayerController contactingPlayer;
     bool isBeingInteracted = false;
@@ -44,7 +46,7 @@ public class LongInteractable : MonoBehaviour
         interactablePopup.SetActive(false);
         pb.gameObject.SetActive(true);
         StartCoroutine(ProgressCoroutine());
-        //TODO: block player movement
+        StartCoroutine(PlayInteractingSound());
     }
 
     IEnumerator ProgressCoroutine()
@@ -77,5 +79,14 @@ public class LongInteractable : MonoBehaviour
     public void Interrupt()
     {
         FinishedInteracting(false);
+    }
+
+    IEnumerator PlayInteractingSound()
+    {
+        src.enabled = true;
+        src.clip = interactingAudio;
+        src.Play();
+        yield return new WaitUntil(() => !isBeingInteracted);
+        src.enabled = false;
     }
 }
