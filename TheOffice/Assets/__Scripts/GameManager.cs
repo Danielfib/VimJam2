@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
         stats = new LevelCompletionStatus[lvlsBuildIds.Length];
     }
 
-    public void Nextlevel() 
+    public void NextLevel() 
     {
         currentLevel++;
         SceneManager.LoadScene(currentLevel);

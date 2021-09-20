@@ -30,7 +30,7 @@ public class EndLevelCanvas : MonoBehaviour
 
     public void NextLevel()
     {
-        GameManager.Instance.GoBackToHome();
+        GameManager.Instance.NextLevel();
     }
 
     public void GoToHome()
