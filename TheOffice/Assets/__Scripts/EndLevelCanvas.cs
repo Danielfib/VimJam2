@@ -31,20 +31,29 @@ public class EndLevelCanvas : MonoBehaviour
     void OpenScreen()
     {
         gameObject.SetActive(true);
+        StartCoroutine(MusicManager.Instance.MuteFor(GetComponent<AudioSource>().clip.length));
     }
 
     public void NextLevel()
     {
+        ResumeMusic();
         GameManager.Instance.NextLevel();
     }
 
     public void GoToHome()
     {
+        ResumeMusic();
         GameManager.Instance.GoBackToHome();
     }
 
     public void RestartLevel()
     {
+        ResumeMusic();
         GameManager.Instance.RestartLevel();
+    }
+
+    private void ResumeMusic()
+    {
+        MusicManager.Instance.ReturnMusic();
     }
 }

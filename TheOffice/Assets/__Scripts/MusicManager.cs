@@ -17,6 +17,8 @@ public class MusicManager : Singleton<MusicManager>
     [SerializeField]
     AudioClip bossMusic;
 
+    float prevVol;
+
     public void Awake()
     {
         base.Awake();
@@ -60,9 +62,14 @@ public class MusicManager : Singleton<MusicManager>
 
     public IEnumerator MuteFor(float seconds)
     {
-        var prevVol = audioSrc.volume;
+        prevVol = audioSrc.volume;
         audioSrc.volume = 0;
         yield return new WaitForSeconds(seconds);
+        ReturnMusic();
+    }
+
+    public void ReturnMusic()
+    {
         audioSrc.volume = prevVol;
     }
 }

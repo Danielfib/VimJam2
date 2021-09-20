@@ -67,7 +67,6 @@ public class Fov : MonoBehaviour
         }
 
         fovMesh.vertices = fovVertices;
-        //fovMesh.uv = uv;
         fovMesh.triangles = fovTris;
     }
 

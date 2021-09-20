@@ -8,7 +8,7 @@ public class SFXManager : Singleton<SFXManager>
     [SerializeField] 
     AudioClip bossAlert, bossChasing, bossDeath,
     playerLostMind, playerHitsBoss, playerAlertSiren, 
-    lose, win, stressRelief;
+    lose, stressRelief;
 
     [SerializeField]
     AudioClip buttonPress;
@@ -28,17 +28,7 @@ public class SFXManager : Singleton<SFXManager>
     public void PlayerAlertSiren() { Play(playerAlertSiren); }
 
     public void Lose() { Play(lose); }
-    public void Win() { StopMusicFor(win.length); Play(win); }
     public void StressRelief() { Play(stressRelief); }
-    public void PlayedVideoGame(float duration)
-    {
-
-    }
 
     public void ButtonPress() { Play(buttonPress); }
-
-    void StopMusicFor(float seconds)
-    {
-        StartCoroutine(MusicManager.Instance.MuteFor(seconds));
-    }
 }
