@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MusicManager : MonoBehaviour
+public class MusicManager : Singleton<MusicManager>
 {
     [SerializeField]
     AudioSource audioSrc;
@@ -16,8 +16,9 @@ public class MusicManager : MonoBehaviour
 
     int currentLevel = 0;
 
-    private void Awake()
+    public void Awake()
     {
+        base.Awake();
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded -= LoadedScene;
         SceneManager.sceneLoaded += LoadedScene;
@@ -49,5 +50,13 @@ public class MusicManager : MonoBehaviour
         int r = Random.Range(0, gameMusics.Length);
         var chosenClip = gameMusics[r];
         Play(chosenClip);
+    }
+
+    public IEnumerator MuteFor(float seconds)
+    {
+        var prevVol = audioSrc.volume;
+        audioSrc.volume = 0;
+        yield return new WaitForSeconds(seconds);
+        audioSrc.volume = prevVol;
     }
 }

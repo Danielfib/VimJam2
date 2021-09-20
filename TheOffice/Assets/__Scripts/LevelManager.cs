@@ -30,6 +30,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (isStillPlaying)
         {
+            SFXManager.Instance.Win();
             isStillPlaying = false;
             StopLevel();
             SendStatusToGameManager(lvlStatus);

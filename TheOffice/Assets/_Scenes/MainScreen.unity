@@ -971,6 +971,7 @@ MonoBehaviour:
   playerHitsBoss: {fileID: 8300000, guid: c96852fef621116418fe5794362da8bd, type: 3}
   playerAlertSiren: {fileID: 8300000, guid: 85c8eb6f3a0085e4485efadb3887fc87, type: 3}
   lose: {fileID: 8300000, guid: 320901bc172430d409847f0df43f3318, type: 3}
+  win: {fileID: 8300000, guid: 52cef1575e4135442b52e6f659961b03, type: 3}
   stressRelief: {fileID: 8300000, guid: c36b6c7757681fe40b1cfa5bd148e8fb, type: 3}
   buttonPress: {fileID: 8300000, guid: 1c129c3fc3e465642828c86ecb9e0b54, type: 3}
 --- !u!4 &760751140
