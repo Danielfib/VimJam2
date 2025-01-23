@@ -52,8 +52,8 @@ public class PlayerController : MonoBehaviour
 
     private void Animate()
     {
-        animator.SetBool("IsWalking", rb.velocity != Vector2.zero);
-        animator.speed = Mathf.Clamp(rb.velocity.magnitude / 4, 1, 2) * stressMultiplier;
+        animator.SetBool("IsWalking", rb.linearVelocity != Vector2.zero);
+        animator.speed = Mathf.Clamp(rb.linearVelocity.magnitude / 4, 1, 2) * stressMultiplier;
     }
 
     public void Stepped()
@@ -74,12 +74,12 @@ public class PlayerController : MonoBehaviour
         var h = Input.GetAxis("Horizontal");
         var v = Input.GetAxis("Vertical");
 
-        rb.velocity = new Vector2(h, v) * speed;
+        rb.linearVelocity = new Vector2(h, v) * speed;
     }
 
     public void SetIsBusy(bool v)
     {
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         isBusy = v;
     }
 

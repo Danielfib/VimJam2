@@ -21,7 +21,7 @@ public class Chaser : MonoBehaviour
 
     void ChasePos()
     {
-        rb.velocity = (positions[currentPosition] - transform.position).normalized * speed;
+        rb.linearVelocity = (positions[currentPosition] - transform.position).normalized * speed;
     }
 
     void GotToNextPos()
@@ -66,7 +66,7 @@ public class Chaser : MonoBehaviour
 
     private void ArrivedAtFinalPosition()
     {
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         BloodSplatter();
         LoseScreen();
         enabled = false;
